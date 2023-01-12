@@ -115,21 +115,25 @@ void loop() {
 
   // prints the distance in the serial monitor
 
-
+  // both conditions have to be true for this.temp state of motor goes to true
   if (distanceCm < 50 && !motorRunning) {
+    // prints the distance when this fn starts
     Serial.print("Distance (cm)");
     Serial.println(distanceCm);
     Serial.println("turning");
-    motor.step(steps_per_rev * 3);
     motorRunning = true;
+    motor.step(steps_per_rev * 3);
       
   }
 
+  // same prin... as earlier. distance is > 50 and the motor state switches back to false
   if (distanceCm >= 50 && motorRunning) {
     Serial.print("Distance (cm)");
     Serial.println(distanceCm);
     Serial.println("closing");
+    // state goes to false
     motorRunning = false;
+    // 2.5 doesnt keep the string taught, so switch to 3 
     motor.step(-steps_per_rev * 3);
 
   }
